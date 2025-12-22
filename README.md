@@ -3,7 +3,7 @@
 
 #### Выполнил: `Шикина Дарья Александровна`
 
-#### Вариант: `22`
+#### Вариант: `26`
 
 ### Cодержание:
 
@@ -139,39 +139,38 @@ class Keyboard {
         zifri = new boolean[10];
         shift = true;
 
-        for (int i = 0; i < 26; i++)
+        for (int i = 0; i<26; i++)
             bukvi[i] = true;
-        for (int i = 0; i < 10; i++)
+        for (int i=0; i<10; i++)
             zifri[i] = true;
     }
 
     public String BrokenKeys() {
-        String r = "";
-        for (int i = 0; i < 26; i++) {
+        String r="";
+        for (int i = 0; i <26; i++) {
             if (bukvi[i]==false)
-                r += (char) ('a' + i) + ", ";
+                r+=(char) ('a' + i) + ", ";
         }
         for (int i = 0; i < 10; i++) {
             if (zifri[i]==false)
                 r += (char) ('0' + i) + ", ";
         }
         if (shift==false)
-            r += "SHIFT, ";
+            r+= "SHIFT,";
         if (r.length() == 0)
             return "Все клавиши работают";
         return r;
     }
 
     public void Breakk(char x) {
-        if (x >= 'a' && x <= 'z')
-            bukvi[x - 'a'] = false;
-        else if (x >= 'A' && x <= 'Z')
-            bukvi[x - 'A'] = false;
+        if (x >='a' && x <='z')
+            bukvi[x-'a'] = false;
+        else if (x>= 'A' && x <= 'Z')
+            bukvi[x-'A'] = false;
         else if (x >= '0' && x <= '9')
-            zifri[x - '0'] = false;
-        else if (x == '*') {
+            zifri[x-'0'] = false;
+        else if (x == '*')
             shift = false;
-        }
     }
 
     public boolean Printt(char x) {
@@ -180,20 +179,20 @@ class Keyboard {
         else if (x >= 'A' && x <= 'Z') {
             if (shift == false)
                 return false;
-            else if (bukvi[x - 'A'] == false)
+            else if (bukvi[x -'A'] == false)
                 return false;
         return true;
         }
         else if (x >= '0' && x <= '9')
-            return zifri[x - '0'];
+            return zifri[x-'0'];
         return true;
     }
 
     public void Repair(char x) {
         if (x >= 'a' && x <= 'z')
             bukvi[x - 'a'] = true;
-        else if (x >= 'A' && x <= 'Z')
-            bukvi[x - 'A'] = true;
+        else if (x >='A' && x <= 'Z')
+            bukvi[x-'A'] = true;
         else if (x >= '0' && x <= '9')
             zifri[x - '0'] = true;
         else if (x == '*')
@@ -202,9 +201,8 @@ class Keyboard {
 
     public boolean PrintWord(String word) {
         for (int i = 0; i < word.length(); i++) {
-            if (Printt(word.charAt(i))==false) {
+            if (Printt(word.charAt(i))==false)
                 return false;
-            }
         }
         return true;
     }
@@ -226,23 +224,22 @@ class Keyboard {
     }
 
     public String KlWord(String word) {
-        String r = "";
-
+        String r="";
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
-            if (c >= 'a' && c <= 'z') {
-                if (bukvi[c - 'a']==false)
-                    r += c + ", ";
+            if (c>='a' && c <= 'z') {
+                if (bukvi[c-'a']==false)
+                    r+=c + ", ";
             }
             else if (c >= 'A' && c <= 'Z') {
-                if (bukvi[c - 'A']==false)
+                if (bukvi[c-'A']==false)
                     r += (char)(c+32) + ", ";
                 if (shift==false)
                     r += "SHIFT, ";
             }
-            else if (c >= '0' && c <= '9') {
+            else if (c>='0' && c <= '9') {
                 if (zifri[c - '0']==false)
-                    r += c + ", ";
+                    r+=c + ", ";
             }
         }
         if (r.length() == 0)
@@ -254,8 +251,8 @@ class Keyboard {
         String[] words = text.split(" ");
         int k = 0;
         for (int i = 0; i < words.length; i++) {
-            String currentWord = words[i];
-            boolean canPrint = PrintWord(currentWord);
+            String w = words[i];
+            boolean canPrint = PrintWord(w);
             if (canPrint == true)
                 k ++;
         }
@@ -263,9 +260,9 @@ class Keyboard {
     }
 
     public void AnWord(String word) {
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 0; i<word.length();i++) {
             char c = word.charAt(i);
-            if (Printt(c))
+            if (Printt(c)==true)
                 System.out.print(c);
             else {
                 Breakk(c);
@@ -275,17 +272,18 @@ class Keyboard {
         System.out.println();
     }
 
-    public void BosstanPolomka(String keys, boolean shouldRepair) {
-        for (int i = 0; i < keys.length(); i++) {
-            char key = keys.charAt(i);
-            if (shouldRepair)
-                Repair(key);
+    public void BosstanPolomka(String x, boolean y) {
+        for (int i = 0; i < x.length(); i++) {
+            char c = x.charAt(i);
+            if (y==true)
+                Repair(c);
             else
-                Breakk(key);
+                Breakk(c);
         }
     }
 
 }
+
 ```
 Тест программы: 
 ```
