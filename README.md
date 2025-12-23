@@ -259,17 +259,19 @@ class Keyboard {
         return k;
     }
 
-    public void AnWord(String word) {
+    public void AnWord(String word, String w) {
+        int j = 0;
         for (int i = 0; i<word.length();i++) {
             char c = word.charAt(i);
-            if (Printt(c)==true)
-                System.out.print(c);
-            else {
-                Breakk(c);
-                System.out.print("[" + c + "-broken]");
+            if (j<w.length() && c==w.charAt(j)){
+                Repair(c);
+                if (c>='A' && c<='Z')
+                    Repair('*');
+                j++;
             }
+            else
+                Breakk(c);
         }
-        System.out.println();
     }
 
     public void BosstanPolomka(String x, boolean y) {
@@ -319,8 +321,11 @@ public class Test {
         String text = "Three cats Watched 1 apple fall";
         System.out.println("9. Можно напечатать слов из '" + text + "': " + k.WordText(text));
 
-        System.out.println("10. Слово 'Apple123':");
-        k.AnWord("Apple123");
+        System.out.println("10. Слово 'Word', печатная версия 'Wr:");
+        System.out.println("До анализа слова были сломаны:"+k.BrokenKeys());
+        k.AnWord("Word", "Wr");
+        System.out.println("Сломанные клавиши после анализа:"+k.BrokenKeys());
+
 
         System.out.println("11. Восстанавливаем 'a1*':");
         k.BosstanPolomka("a1*", true);
